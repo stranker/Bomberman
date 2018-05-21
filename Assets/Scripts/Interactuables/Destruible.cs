@@ -8,7 +8,7 @@ public class Destruible : MonoBehaviour {
     public float probPowerUp;
 	// Use this for initialization
 	void Start () {
-        probPowerUp = 0.001f;
+        probPowerUp = 0.6f;
 	}
 
     public void Destruir()

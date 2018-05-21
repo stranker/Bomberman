@@ -26,7 +26,7 @@ public class Puerta : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if (abierta && other.tag == "Player")
+        if (abierta && other.tag == "Player" || abierta && other.tag == "FPSPlayer")
         {
             GameManager.FinNivel();
         }
