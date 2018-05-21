@@ -13,7 +13,7 @@ OcclusionCullingSettings:
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 9
+  serializedVersion: 8
   m_Fog: 0
   m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_FogMode: 3
@@ -38,8 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
-  m_UseRadianceAmbientProbe: 0
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -55,10 +54,11 @@ LightmapSettings:
     m_EnableBakedLightmaps: 1
     m_EnableRealtimeLightmaps: 0
   m_LightmapEditorSettings:
-    serializedVersion: 10
+    serializedVersion: 9
     m_Resolution: 2
     m_BakeResolution: 10
-    m_AtlasSize: 512
+    m_TextureWidth: 1024
+    m_TextureHeight: 1024
     m_AO: 0
     m_AOMaxDistance: 1
     m_CompAOExponent: 1
@@ -222,7 +222,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 39.7, y: -140.4}
+  m_AnchoredPosition: {x: 39.7, y: -165.3}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &97541740
@@ -323,6 +323,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &276114988 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1492634444661826, guid: dcb76e727df354a4d8ff624b9d6c2059,
+    type: 2}
+  m_PrefabInternal: {fileID: 1836715307}
+--- !u!114 &276114989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 276114988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3d27c68bd7c7e840b783486a96b7f98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &282840810
 GameObject:
   m_ObjectHideFlags: 0
@@ -657,8 +673,19 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 82799038418949630, guid: 0f1bcac438677b547a3e41b86a93c33c,
+        type: 2}
+      propertyPath: panLevelCustomCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 82799038418949630, guid: 0f1bcac438677b547a3e41b86a93c33c,
+        type: 2}
+      propertyPath: reverbZoneMixCustomCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 143525363286720858, guid: 0f1bcac438677b547a3e41b86a93c33c, type: 2}
+    - {fileID: 82799038418949630, guid: 0f1bcac438677b547a3e41b86a93c33c, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 0f1bcac438677b547a3e41b86a93c33c, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &680599316
@@ -979,7 +1006,7 @@ MonoBehaviour:
   enemigoRojo: {fileID: 1880116846103052, guid: dcfe3749800fd2e428693820246d6ff8,
     type: 2}
   puerta: {fileID: 1445791243300300, guid: 465c91aff6b31e0469d8489872c1998d, type: 2}
-  cantidadEnemigos: 0
+  cantidadEnemigos: 2
   largoMapa: 9
   anchoMapa: 7
 --- !u!4 &1089961555
@@ -1289,6 +1316,11 @@ Prefab:
       propertyPath: m_RunSpeed
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 143881876970829686, guid: dcb76e727df354a4d8ff624b9d6c2059,
+        type: 2}
+      propertyPath: m_SlopeLimit
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dcb76e727df354a4d8ff624b9d6c2059, type: 2}
   m_IsPrefabParent: 0
@@ -1324,7 +1356,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 139, y: -90.64998}
+  m_AnchoredPosition: {x: 139, y: -105.6}
   m_SizeDelta: {x: 248.6, y: 33.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1897879286
@@ -1339,7 +1371,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:

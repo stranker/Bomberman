@@ -13,6 +13,7 @@ public class PowerUp : MonoBehaviour {
 
     private TIPO tipoPower;
     private bool activado;
+    public List<Material> materiales;
 	// Use this for initialization
 	void Start () {
         activado = false;
@@ -30,6 +31,7 @@ public class PowerUp : MonoBehaviour {
             default:
                 break;
         }
+        GetComponent<MeshRenderer>().material = materiales[(int)tipoPower];
     }
 
     private void Update()

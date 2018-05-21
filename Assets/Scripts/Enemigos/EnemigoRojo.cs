@@ -17,12 +17,12 @@ public class EnemigoRojo : MonoBehaviour
         vivo = true;
         tiempoCaminando = 2;
         timer = tiempoCaminando;
-        direccion = new Vector3(Random.Range(0, 1.0f), 0, Random.Range(0, 1.0f));
+        direccion = new Vector3(Random.Range(-1, 1), 0, Random.Range(1, 1));
         puntaje = 200;
     }
 
     // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
         if (vivo)
         {
@@ -36,9 +36,26 @@ public class EnemigoRojo : MonoBehaviour
         timer += Time.deltaTime;
         if (timer >= tiempoCaminando)
         {
-            direccion = new Vector3(Random.Range(0, 1.0f), 0, Random.Range(0, 1.0f));
+            switch (Random.Range(0,3))
+            {
+                case 0:
+                    direccion = Vector3.forward;
+                    break;
+                case 1:
+                    direccion = Vector3.back;
+                    break;
+                case 2:
+                    direccion = Vector3.right;
+                    break;
+                case 3:
+                    direccion = Vector3.left;
+                    break;
+                default:
+                    break;
+            }
             timer = 0;
         }
+        transform.position = new Vector3(Mathf.RoundToInt(transform.position.x - 0.5f) + 0.5f, transform.position.y, Mathf.RoundToInt(transform.position.z - 0.5f) + 0.5f);
     }
 
     private void OnCollisionEnter(Collision collision)

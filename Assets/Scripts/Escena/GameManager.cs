@@ -155,6 +155,7 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+        playerFPS.transform.position = player.transform.position;
         GameObject clon = Instantiate(piso);
         clon.transform.position = new Vector3(largoMapa, 0, anchoMapa) / 2;
         clon.transform.localScale = new Vector3(largoMapa, 1, anchoMapa) / 10;
