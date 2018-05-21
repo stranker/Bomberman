@@ -3,7 +3,15 @@ guid: d3db68c3fd9ab984888ffe6542b22d2b
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - cajaIndestructible: {fileID: 1521573283690298, guid: 680e4ed70e273e24281da66c9ea3dc49,
+      type: 2}
+  - cajaDestruible: {fileID: 1872854713840200, guid: f17aea6b674499a4ea62c85544ea1a22,
+      type: 2}
+  - piso: {fileID: 1792078393222354, guid: 5ff49b5e0e37aeb49adc99a482231404, type: 2}
+  - enemigoRojo: {fileID: 1880116846103052, guid: dcfe3749800fd2e428693820246d6ff8,
+      type: 2}
+  - puerta: {fileID: 1445791243300300, guid: 465c91aff6b31e0469d8489872c1998d, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

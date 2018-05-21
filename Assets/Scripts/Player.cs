@@ -5,17 +5,30 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public GameObject bombaPrefab;
+    public int vida;
     private List<GameObject> bombas;
-    private int maxBombas = 1;
+    private int maxBombas;
     private Vector3 movimiento;
-    private int speed = 100;
-    private int maxDistanceBomb;
+    private int speed = 150;
+    private int rango;
+    private bool puedeSerLastimado;
+    private int tiempoIntocable;
+    private float timer;
     // Use this for initialization
-    void Start()
+    private void Awake()
+    {
+        Inicializar();
+    }
+    public void Inicializar()
     {
         movimiento = Vector3.zero;
         bombas = new List<GameObject>();
-        maxDistanceBomb = 2;
+        rango = 1;
+        vida = 2;
+        tiempoIntocable = 4;
+        timer = 0;
+        maxBombas = 3;
+        puedeSerLastimado = true;
     }
 
     // Update is called once per frame
@@ -23,6 +36,20 @@ public class Player : MonoBehaviour
     {
         MovimientoPersonaje();
         PonerBomba();
+        CheckearLastimado();
+    }
+
+    public void CheckearLastimado()
+    {
+        if (!puedeSerLastimado)
+        {
+            timer += Time.deltaTime;
+        }
+        if (timer >= tiempoIntocable)
+        {
+            puedeSerLastimado = true;
+            timer = 0;
+        }
     }
 
     public void MovimientoPersonaje()
@@ -34,12 +61,12 @@ public class Player : MonoBehaviour
 
     public void PonerBomba()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && PuedoPonerBombas())
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) && PuedoPonerBombas())
         {
             GameObject bomba = Instantiate(bombaPrefab, transform.parent);
             bomba.transform.position = new Vector3(Mathf.Round(transform.position.x -0.5f) + 0.5f ,bombaPrefab.transform.position.y,Mathf.Round(transform.position.z - 0.5f) + 0.5f);
             bomba.GetComponent<Bomba>().SetList(bombas);
-            bomba.GetComponent<Bomba>().SetMaxDistance(maxDistanceBomb);
+            bomba.GetComponent<Bomba>().SetMaxDistance(rango);
             bombas.Add(bomba); 
         }
     }
@@ -52,8 +79,35 @@ public class Player : MonoBehaviour
         return puede;
     }
 
-    public int GetMaxDistanceBomb()
+    public void TakeDamage()
     {
-        return maxDistanceBomb;
+        if (puedeSerLastimado)
+        {
+            vida--;
+            puedeSerLastimado = false;
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.tag == "Enemigo")
+        {
+            TakeDamage();
+        }
+    }
+
+    public int GetVidas()
+    {
+        return vida;
+    }
+
+    public int GetBombas()
+    {
+        return maxBombas - bombas.Count;
+    }
+
+    public int GetRango()
+    {
+        return rango;
     }
 }

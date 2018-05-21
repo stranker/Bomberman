@@ -7,19 +7,23 @@ public class Explosion : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         duracion = 2;
-        Invoke("Destruir", 2);
+        Invoke("Destruir", duracion);
 	}
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Destruible")
-        {
-            Debug.Log("xd");
-        }
-    }
 
     private void Destruir()
     {
         Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            other.gameObject.GetComponent<Player>().TakeDamage();
+        }
+        if (other.tag == "Enemigo")
+        {
+            other.gameObject.GetComponent<EnemigoRojo>().Destruir();
+        }
     }
 }
