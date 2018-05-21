@@ -9,6 +9,8 @@ TagManager:
   - Explosion
   - Destruible
   - Enemigo
+  - FPSPlayer
+  - PowerUp
   layers:
   - Default
   - TransparentFX

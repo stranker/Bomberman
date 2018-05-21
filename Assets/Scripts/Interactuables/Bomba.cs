@@ -5,13 +5,15 @@ using UnityEngine;
 public class Bomba : MonoBehaviour {
     public GameObject explosion;
     public LayerMask levelLayer;
-    private float tiempoExplosion;
+    public float tiempoExplosion;
     private int rango;
     private List<GameObject> bombas;
+    private Vector3 posicionInicial;
 
     // Use this for initialization
     void Start() {
-        tiempoExplosion = 4;
+        posicionInicial = transform.position;
+        tiempoExplosion = 3;
         Invoke("Explotar", tiempoExplosion);
     }
 
@@ -52,17 +54,17 @@ public class Bomba : MonoBehaviour {
         for (int i = 1; i < rango + 1; i++)
         {
             RaycastHit hit;
-            Physics.Raycast(transform.position + new Vector3(0,0.5f,0),direction * i, out hit,1);
+            Physics.Raycast(posicionInicial + new Vector3(0,0.4f,0),direction * i, out hit,i);
             if (!hit.collider)
             {
-                Instantiate(explosion, transform.position + (i * direction), explosion.transform.rotation);
+                Instantiate(explosion, posicionInicial + (i * direction), explosion.transform.rotation);
             }
             else
             {
                 if (hit.transform.tag == "Destruible")
                     hit.transform.GetComponent<Destruible>().Destruir();
-                if (hit.transform.tag == "Player")
-                    hit.transform.GetComponent<Player>().TakeDamage();
+                if (hit.transform.tag == "Player" || hit.transform.tag == "FPSPlayer")
+                    GameManager.player.GetComponent<Player>().TakeDamage();
                 if (hit.transform.tag == "Enemigo")
                     hit.transform.GetComponent<EnemigoRojo>().Destruir();
                 break;

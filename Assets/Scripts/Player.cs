@@ -1,16 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.Characters.FirstPerson;
 
 public class Player : MonoBehaviour
 {
     public GameObject bombaPrefab;
     public int vida;
+    public int maxBombas;
+    public int rango;
     private List<GameObject> bombas;
-    private int maxBombas;
     private Vector3 movimiento;
     private int speed = 150;
-    private int rango;
     private bool puedeSerLastimado;
     private int tiempoIntocable;
     private float timer;
@@ -27,7 +28,7 @@ public class Player : MonoBehaviour
         vida = 2;
         tiempoIntocable = 4;
         timer = 0;
-        maxBombas = 3;
+        maxBombas = 1;
         puedeSerLastimado = true;
     }
 
@@ -38,6 +39,8 @@ public class Player : MonoBehaviour
         PonerBomba();
         CheckearLastimado();
     }
+
+
 
     public void CheckearLastimado()
     {
@@ -109,5 +112,18 @@ public class Player : MonoBehaviour
     public int GetRango()
     {
         return rango;
+    }
+
+    public void UpgradeBomba()
+    {
+        maxBombas++;
+    }
+    public void UpgradeRango()
+    {
+        rango++;
+    }
+    public void UpgradeVida()
+    {
+        vida++;
     }
 }

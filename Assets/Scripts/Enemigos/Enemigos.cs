@@ -10,11 +10,9 @@ enum ESTADOS
 };
 
 public class Enemigos : MonoBehaviour {
-    private bool vivo;
     private ESTADOS estadoActual;
 	// Use this for initialization
 	void Start () {
-        vivo = true;
         estadoActual = ESTADOS.IDLE;
 	}
 	

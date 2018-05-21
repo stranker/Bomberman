@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityStandardAssets.Characters.FirstPerson;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class GameManager : MonoBehaviour
     public static int puntajeTotal;
     public static int vidasRestantes;
     public static GameObject player;
+    public static GameObject playerFPS;
     public static int tiempoTranscurrido;
     public static int bombasSimultaneas;
     public static int rangoMaximo;
@@ -27,6 +29,7 @@ public class GameManager : MonoBehaviour
     private List<GameObject> cajas;
     private static bool gameOver;
     private bool finalScreen;
+    private bool modoFPS;
     
     // Use this for initialization
 
@@ -39,6 +42,7 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         cajas = new List<GameObject>();
         player = GameObject.FindGameObjectWithTag("Player");
+        playerFPS = GameObject.FindGameObjectWithTag("FPSPlayer");
         finalScreen = false;
     }
 
@@ -49,6 +53,7 @@ public class GameManager : MonoBehaviour
         gameOver = false;
         puntajeTotal = 0;
         vidasRestantes = player.GetComponent<Player>().GetVidas();
+        ModoTopView();
         GenerarMapa();
     }
 
@@ -61,9 +66,41 @@ public class GameManager : MonoBehaviour
             vidasRestantes = player.GetComponent<Player>().GetVidas();
             bombasSimultaneas = player.GetComponent<Player>().GetBombas();
             rangoMaximo = player.GetComponent<Player>().GetRango();
+            CheckModoJuego();
         }
         enemigosMatados = cantidadEnemigos - enemigosVivos;
-        
+        if (modoFPS)
+            if(player)
+                player.transform.position = playerFPS.transform.position;
+        else
+            if (playerFPS)
+                playerFPS.transform.position = player.transform.position;
+    }
+
+    public void CheckModoJuego()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            ModoTopView();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            ModoFPS();
+        }
+    }
+
+    private void ModoTopView()
+    {
+        player.SetActive(true);
+        playerFPS.gameObject.SetActive(false);
+        modoFPS = false;
+    }
+
+    private void ModoFPS()
+    {
+        playerFPS.gameObject.SetActive(true);
+        player.SetActive(false);
+        modoFPS = true;
     }
 
     public void GenerarMapa()
