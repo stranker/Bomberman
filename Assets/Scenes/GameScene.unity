@@ -280,7 +280,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cajaIndestructible: {fileID: 1521573283690298, guid: 680e4ed70e273e24281da66c9ea3dc49,
     type: 2}
+  cajaDestruible: {fileID: 1872854713840200, guid: f17aea6b674499a4ea62c85544ea1a22,
+    type: 2}
   piso: {fileID: 1792078393222354, guid: 5ff49b5e0e37aeb49adc99a482231404, type: 2}
+  player: {fileID: 1536526646}
 --- !u!4 &1089961555
 Transform:
   m_ObjectHideFlags: 0
@@ -376,8 +379,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1536526646}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.5319657, y: 1.16, z: 3.5700946}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
+  m_LocalPosition: {x: 6.5319657, y: 1, z: 3.5700946}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -393,6 +396,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b19b0176ab1c37642a6f3763bb3c9c45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bombaPrefab: {fileID: 1221499916473106, guid: 150086d188a805348b9f040653214f88,
+    type: 2}
 --- !u!54 &1536526652
 Rigidbody:
   m_ObjectHideFlags: 0
