@@ -61,16 +61,13 @@ namespace UnityStandardAssets.Characters.FirstPerson
         // Update is called once per frame
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                GameManager.player.GetComponent<Player>().PonerBomba();
-            }
+
             RotateView();
             // the jump state needs to read here to make sure it is not missed
-            /*if (!m_Jump)
+            if (!m_Jump)
             {
                 m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
-            }*/
+            }
 
             if (!m_PreviouslyGrounded && m_CharacterController.isGrounded)
             {

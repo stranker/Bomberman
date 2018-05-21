@@ -13,16 +13,16 @@ public class EnemigoRojo : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        speed = 150;
+        speed = 1000;
         vivo = true;
         tiempoCaminando = 2;
         timer = tiempoCaminando;
-        direccion = new Vector3(Random.Range(0, 1.0f), 0, Random.Range(0, 1.0f));
+        direccion = new Vector3(Random.Range(-1, 1), 0, Random.Range(1, 1));
         puntaje = 200;
     }
 
     // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
         if (vivo)
         {
@@ -32,13 +32,30 @@ public class EnemigoRojo : MonoBehaviour
 
     public void Moverse()
     {
-        GetComponent<Rigidbody>().velocity = direccion * speed * Time.deltaTime;
         timer += Time.deltaTime;
         if (timer >= tiempoCaminando)
         {
-            direccion = new Vector3(Random.Range(0, 1.0f), 0, Random.Range(0, 1.0f));
+            switch (Random.Range(0,4))
+            {
+                case 0:
+                    direccion = Vector3.forward;
+                    break;
+                case 1:
+                    direccion = Vector3.back;
+                    break;
+                case 2:
+                    direccion = Vector3.right;
+                    break;
+                case 3:
+                    direccion = Vector3.left;
+                    break;
+                default:
+                    break;
+            }
             timer = 0;
         }
+        GetComponent<Rigidbody>().velocity = direccion * speed * Time.deltaTime;
+
     }
 
     private void OnCollisionEnter(Collision collision)
