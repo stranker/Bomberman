@@ -13,7 +13,7 @@ public class EnemigoRojo : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        speed = 150;
+        speed = 1000;
         vivo = true;
         tiempoCaminando = 2;
         timer = tiempoCaminando;
@@ -32,11 +32,10 @@ public class EnemigoRojo : MonoBehaviour
 
     public void Moverse()
     {
-        GetComponent<Rigidbody>().velocity = direccion * speed * Time.deltaTime;
         timer += Time.deltaTime;
         if (timer >= tiempoCaminando)
         {
-            switch (Random.Range(0,3))
+            switch (Random.Range(0,4))
             {
                 case 0:
                     direccion = Vector3.forward;
@@ -55,7 +54,8 @@ public class EnemigoRojo : MonoBehaviour
             }
             timer = 0;
         }
-        transform.position = new Vector3(Mathf.RoundToInt(transform.position.x - 0.5f) + 0.5f, transform.position.y, Mathf.RoundToInt(transform.position.z - 0.5f) + 0.5f);
+        GetComponent<Rigidbody>().velocity = direccion * speed * Time.deltaTime;
+
     }
 
     private void OnCollisionEnter(Collision collision)
