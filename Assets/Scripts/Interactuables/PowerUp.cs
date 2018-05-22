@@ -36,24 +36,24 @@ public class PowerUp : MonoBehaviour {
 
     private void Update()
     {
-        transform.Rotate(Vector3.up,Time.deltaTime);
+        transform.Rotate(Vector3.up,1);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!activado && (other.gameObject.tag == "Player" || other.gameObject.tag == "FPSPlayer"))
+        if (!activado && (other.gameObject.tag == "Player"))
         {
             activado = true;
             switch (tipoPower)
             {
                 case TIPO.BOMBA:
-                    GameManager.player.GetComponent<Player>().UpgradeBomba();
+                    GameManager.Get().GetPlayer().GetComponent<Player>().UpgradeBomba();
                     break;
                 case TIPO.RANGO:
-                    GameManager.player.GetComponent<Player>().UpgradeRango();
+                    GameManager.Get().GetPlayer().GetComponent<Player>().UpgradeRango();
                     break;
                 case TIPO.VIDA:
-                    GameManager.player.GetComponent<Player>().UpgradeVida();
+                    GameManager.Get().GetPlayer().GetComponent<Player>().UpgradeVida();
                     break;
                 default:
                     break;

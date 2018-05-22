@@ -17,13 +17,9 @@ public class Explosion : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player" || other.tag == "FPSPlayer")
-        {
-            GameManager.player.GetComponent<Player>().TakeDamage();
-        }
+        if (other.tag == "Player")
+            GameManager.Get().GetPlayer().GetComponent<Player>().TakeDamage();
         if (other.tag == "Enemigo")
-        {
-            other.gameObject.GetComponent<EnemigoRojo>().Destruir();
-        }
+            other.gameObject.GetComponent<Enemigos>().Destruir();
     }
 }

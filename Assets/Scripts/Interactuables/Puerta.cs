@@ -13,7 +13,7 @@ public class Puerta : MonoBehaviour {
 
     private void Update()
     {
-        if (GameManager.enemigosVivos == 0 && !abierta)
+        if (GameManager.Get().enemigosVivos == 0 && !abierta)
         {
             AbrirPuerta();
         }
@@ -26,7 +26,7 @@ public class Puerta : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if (abierta && other.tag == "Player" || abierta && other.tag == "FPSPlayer")
+        if (abierta && other.tag == "Player")
         {
             GameManager.FinNivel();
         }

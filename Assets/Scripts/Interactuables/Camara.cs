@@ -15,7 +15,15 @@ public class Camara : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        transform.position = player.transform.position + offset;
-        transform.rotation = rotacion;
+        if (!player)
+        {
+            player = GameManager.Get().GetPlayer();
+        }
+        else
+        {
+            transform.position = player.transform.position + offset;
+            transform.rotation = rotacion;
+        }
+ 
 	}
 }

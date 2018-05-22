@@ -63,10 +63,10 @@ public class Bomba : MonoBehaviour {
             {
                 if (hit.transform.tag == "Destruible")
                     hit.transform.GetComponent<Destruible>().Destruir();
-                if (hit.transform.tag == "Player" || hit.transform.tag == "FPSPlayer")
-                    GameManager.player.GetComponent<Player>().TakeDamage();
+                if (hit.transform.tag == "Player")
+                    GameManager.Get().GetPlayer().GetComponent<Player>().TakeDamage();
                 if (hit.transform.tag == "Enemigo")
-                    hit.transform.GetComponent<EnemigoRojo>().Destruir();
+                    hit.transform.GetComponent<Enemigos>().Destruir();
                 break;
             }
             yield return new WaitForSeconds(.05f);

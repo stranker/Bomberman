@@ -2,32 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemigoRojo : MonoBehaviour
+public class EnemigoRojo : Enemigos
 {
-    public int speed;
-    private bool vivo;
+    int speed;
     private int tiempoCaminando;
     private float timer;
     private Vector3 direccion;
-    private int puntaje;
     // Use this for initialization
     void Start()
     {
+        SetPuntaje(200);
         speed = 1000;
-        vivo = true;
         tiempoCaminando = 2;
         timer = tiempoCaminando;
         direccion = new Vector3(Random.Range(-1, 1), 0, Random.Range(1, 1));
-        puntaje = 200;
     }
 
     // Update is called once per frame
     private void FixedUpdate()
     {
-        if (vivo)
-        {
-            Moverse();
-        }
+        Moverse();
     }
 
     public void Moverse()
@@ -55,21 +49,11 @@ public class EnemigoRojo : MonoBehaviour
             timer = 0;
         }
         GetComponent<Rigidbody>().velocity = direccion * speed * Time.deltaTime;
-
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.transform.tag == "Enemigo")
-        {
+        if (collision.transform.tag == "Enemigo" || collision.transform.tag == "Player")
             direccion = -direccion;
-        }
-    }
-
-    public void Destruir()
-    {
-        GameManager.puntajeTotal += puntaje;
-        GameManager.enemigosVivos--;
-        Destroy(gameObject);
     }
 }

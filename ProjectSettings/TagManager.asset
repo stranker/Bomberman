@@ -11,6 +11,7 @@ TagManager:
   - Enemigo
   - FPSPlayer
   - PowerUp
+  - Mapa
   layers:
   - Default
   - TransparentFX

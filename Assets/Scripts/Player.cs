@@ -10,8 +10,6 @@ public class Player : MonoBehaviour
     public int maxBombas;
     public int rango;
     private List<GameObject> bombas;
-    private Vector3 movimiento;
-    private int speed = 150;
     private bool puedeSerLastimado;
     private int tiempoIntocable;
     private float timer;
@@ -22,7 +20,6 @@ public class Player : MonoBehaviour
     }
     public void Inicializar()
     {
-        movimiento = Vector3.zero;
         bombas = new List<GameObject>();
         rango = 1;
         vida = 2;
@@ -30,36 +27,26 @@ public class Player : MonoBehaviour
         timer = 0;
         maxBombas = 1;
         puedeSerLastimado = true;
+        ModoTopView();
     }
 
     // Update is called once per frame
     void Update()
     {
-        MovimientoPersonaje();
         PonerBomba();
         CheckearLastimado();
+        CheckModoJuego();
     }
-
-
 
     public void CheckearLastimado()
     {
         if (!puedeSerLastimado)
-        {
             timer += Time.deltaTime;
-        }
         if (timer >= tiempoIntocable)
         {
             puedeSerLastimado = true;
             timer = 0;
         }
-    }
-
-    public void MovimientoPersonaje()
-    {
-        movimiento.x = Input.GetAxis("Horizontal") * Time.deltaTime * speed; ;
-        movimiento.z = Input.GetAxis("Vertical") * Time.deltaTime * speed;
-        GetComponent<Rigidbody>().velocity = movimiento;
     }
 
     public void PonerBomba()
@@ -91,13 +78,6 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.transform.tag == "Enemigo")
-        {
-            TakeDamage();
-        }
-    }
 
     public int GetVidas()
     {
@@ -125,5 +105,47 @@ public class Player : MonoBehaviour
     public void UpgradeVida()
     {
         vida++;
+    }
+
+    public void CheckModoJuego()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            ModoTopView();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            ModoFPS();
+        }
+    }
+
+    private void ModoTopView()
+    {
+        GetComponent<FirstPersonController>().enabled = false;
+        GetComponent<ThirdPerson>().enabled = true;
+        GetComponentInChildren<Camera>().enabled = false;
+        GetComponent<CapsuleCollider>().enabled = true;
+        GetComponent<CharacterController>().enabled = false;
+        GetComponent<Rigidbody>().velocity = Vector3.zero;
+    }
+
+    private void ModoFPS()
+    {
+        GetComponent<FirstPersonController>().enabled = true;
+        GetComponent<ThirdPerson>().enabled = false;
+        GetComponentInChildren<Camera>().enabled = true;
+        GetComponent<CapsuleCollider>().enabled = false;
+        GetComponent<CharacterController>().enabled = true;
+        GetComponent<Rigidbody>().velocity = Vector3.zero;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.tag == "Enemigo")
+        {
+            TakeDamage();
+        }
     }
 }

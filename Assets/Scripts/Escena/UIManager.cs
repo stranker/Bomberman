@@ -19,11 +19,11 @@ public class UIManager : MonoBehaviour {
     private float timer;
 	// Use this for initialization
 	void Start () {
-        puntaje = GameManager.puntajeTotal;
-        vidas = GameManager.vidasRestantes;
-        bombas = GameManager.bombasSimultaneas;
-        rango = GameManager.rangoMaximo;
-        matados = GameManager.enemigosMatados;
+        puntaje = GameManager.Get().puntajeTotal;
+        vidas = GameManager.Get().vidasRestantes;
+        bombas = GameManager.Get().bombasSimultaneas;
+        rango = GameManager.Get().rangoMaximo;
+        matados = GameManager.Get().cantidadEnemigos - GameManager.Get().enemigosVivos;
         textoPuntaje.text = "Puntaje  " + puntaje.ToString();
         textoVidas.text = "X " + vidas.ToString();
         textoBombas.text = "X " + bombas.ToString();
@@ -33,34 +33,34 @@ public class UIManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (GameManager.puntajeTotal != puntaje)
+        if (GameManager.Get().puntajeTotal != puntaje)
         {
-            puntaje = GameManager.puntajeTotal;
+            puntaje = GameManager.Get().puntajeTotal;
             UpdateTexto();
         }
-        if (vidas != GameManager.vidasRestantes)
+        if (vidas != GameManager.Get().vidasRestantes)
         {
-            vidas = GameManager.vidasRestantes;
+            vidas = GameManager.Get().vidasRestantes;
             UpdateTexto();
         }
-        if (bombas != GameManager.bombasSimultaneas)
+        if (bombas != GameManager.Get().bombasSimultaneas)
         {
-            bombas = GameManager.bombasSimultaneas;
+            bombas = GameManager.Get().bombasSimultaneas;
             UpdateTexto();
         }
-        if (rango != GameManager.rangoMaximo)
+        if (rango != GameManager.Get().rangoMaximo)
         {
-            rango = GameManager.rangoMaximo;
+            rango = GameManager.Get().rangoMaximo;
             UpdateTexto();
         }
-        if (matados != GameManager.enemigosMatados)
+        if (matados != GameManager.Get().cantidadEnemigos - GameManager.Get().enemigosVivos)
         {
-            matados = GameManager.enemigosMatados;
+            matados = GameManager.Get().cantidadEnemigos - GameManager.Get().enemigosVivos;
             UpdateTexto();
         }
         timer += Time.deltaTime;
         tiempoTranscurrido = Mathf.RoundToInt(timer);
-        GameManager.tiempoTranscurrido = tiempoTranscurrido;
+        GameManager.Get().tiempoTranscurrido = tiempoTranscurrido;
         textoTiempo.text = tiempoTranscurrido.ToString();
     }
 

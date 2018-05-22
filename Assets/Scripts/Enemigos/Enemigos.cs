@@ -3,29 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-enum ESTADOS
-{
-    IDLE,
-    WALKING
-};
-
 public class Enemigos : MonoBehaviour {
-    private ESTADOS estadoActual;
-	// Use this for initialization
-	void Start () {
-        estadoActual = ESTADOS.IDLE;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+    private bool vivo;
+    private int puntaje;
+    // Use this for initialization
+    void Start () {
+
 	}
 
-    private void MaquinaDeEstados()
+    public void Destruir()
     {
-        if (estadoActual == ESTADOS.IDLE)
-        {
-
-        }
+        GameManager.Get().puntajeTotal += puntaje;
+        GameManager.Get().enemigosVivos--;
+        Destroy(gameObject);
     }
+
+    public void SetPuntaje(int val)
+    {
+        puntaje = val;
+    }
+
+    public int GetPuntaje()
+    {
+        return puntaje;
+    }
+
 }
